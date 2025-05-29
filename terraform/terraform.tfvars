@@ -1,0 +1,1 @@
+public_key = "~/.ssh/id_rsa.pub"
