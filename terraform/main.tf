@@ -21,3 +21,16 @@ resource "aws_key_pair" "key_pair1" {
     key_name                = "key-pair-1"
     public_key              = file("~/.ssh/id_rsa.pub)  #define a variable in variable.tf file
 }
+
+#cretaing aws instances using for_each loops
+resource "aws_instance" "env_servers" {
+  for_each = var.environments
+
+  ami           = "ami-0c55b159cbfafe1f0" # Replace with a valid AMI for your region
+  instance_type = "t2.micro"
+
+  tags = {
+    Name        = each.value
+    Environment = each.key
+  }
+}
